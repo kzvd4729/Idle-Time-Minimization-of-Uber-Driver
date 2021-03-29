@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idle Time Minimization of Uber Driver</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+ 
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
+    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
+
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=Ayt9xCnOQZKAPVuUeH5OTSsAI3Hzk0yS"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=Ayt9xCnOQZKAPVuUeH5OTSsAI3Hzk0yS"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <style type="text/css">
+  	.lclass {
+            display: inline-block;
+            position: relative;
+            padding-left: 29px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            color: #111;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Hide the browser's default radio button */
+        .lclass input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Create a custom radio button */
+        .sclass {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 25px;
+            width: 25px;
+            background-color: darksalmon;
+            border-radius: 50%;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .lclass:hover input ~ .sclass {
+            background-color: #ccc;
+        }
+
+        /* When the radio button is checked, add a blue background */
+        .lclass input:checked ~ .sclass {
+            background-color: #2196F3;
+        }
+
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .sclass:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the indicator (dot/circle) when checked */
+        .lclass input:checked ~ .sclass:after {
+            display: block;
+        }
+
+        /* Style the indicator (dot/circle) */
+        .lclass .sclass:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+  </style>
+
+  {% csrf_token %}
+ 
+  <body style="background-color: #f2f9ff;">
+  	<div class="container">
+  		<h2 style="text-align: center;margin-top: 20px;">Idle Time Minimization of Uber Driver</h2>
+  		<div class="row">
+  			<div class="col-md-10">
+  				<div id="time-distance" style="margin-top: 30px;text-align: right;font-weight: 700;color: #111;font-size: 16px;">
+  					
+  				</div>
+  				<div id="map" style="margin-left: -50px; margin-top: 10px; height: 600px; border: 1px solid #AAA;">
+  					
+  				</div>
+  				<div style="margin-top: 10px; text-align: center;"><h5 style="font-weight: 700;color: #111;">Route directions(Narrative)</h5></div>
+  				<div id="route-narrative" style="font-size: 15px;margin-bottom: 10px;font-weight: 700;color: #111;"></div>
+  			</div>
+  			<div class="col-md-2" style="text-align: center;">
+  				<form id="myForm" style="margin-top: 130px;margin-left: 10px;font-weight: 700;color: #111;">
+  					<h6 style="font-weight: 700;color: #111;">Select Hour</h6>
+  					<div class="button dropdown">
+  						<select name="selected" required="required" id="hourSelector">
+  							<option value="0" selected>0 (default)</option>
+  							<option value="1">1</option>
+  							<option value="2">2</option>
+  							<option value="3">3</option>
+  							<option value="4">4</option>
+  							<option value="5">5</option>
+  							<option value="6">6</option>
+  							<option value="7">7</option>
+  							<option value="8">8</option>
+  							<option value="9">9</option>
+  							<option value="10">10</option>
+  							<option value="11">11</option>
+  							<option value="12">12</option>
+  							<option value="13">13</option>
+  							<option value="14">14</option>
+  							<option value="15">15</option>
+  							<option value="16">16</option>
+  							<option value="17">17</option>
+  							<option value="18">18</option>
+  							<option value="19">19</option>
+  							<option value="20">20</option>
+  							<option value="21">21</option>
+  							<option value="22">22</option>
+  							<option value="23">23</option>
+  						</select>
+  					</div>
+  				</form>
+
+  				<fieldset class="hide" style = " margin-top : 20px; margin-left : 25px; " >
+
+          	        <h6 style="font-weight: 700;color: #111;">Holiday or Not?</h6>
+          	         <label class="lclass"> <p> YES </p>
+                            
+                            <input type="radio" name="cus_time_unit" value="1">
+                            
+                            <span class="sclass"></span>
+                        
+                        </label>
+
+                        <label class="lclass"> <p> NO </p>
+                            
+                            <input type="radio" name="cus_time_unit" value="0" checked>
+                            
+                            <span class="sclass"></span>
+                        
+                        </label>
+
+                    </fieldset>
+
+  			</div>
+  		</div>
+  	</div>
+
+
+    <script type="text/javascript">
+
+    	var map="";
+    	$(document).ready(function () {
+    		$('.hide input[type="radio"]').click(function(){
+    			var holiday = $(this).val();
+    			console.log(holiday)
+    			$.ajax({
+    				url: '/',
+                    type: 'GET',
+                    data: {
+                    	holiday: holiday,
+                    },
+                    success: function (data) {
+                    	var msg = $.parseJSON(data);
+                    	markers = JSON.parse(msg.markers);
+                    	console.log(markers);
+                    	var lat = msg.sourceLat, lon = msg.sourceLon;
+                    	var pointX = msg.pointX, pointY = msg.pointY;
+                    	map.off();map.remove(); 
+                    	init_map(lat,lon,pointX,pointY,markers);
+                    }
+               });
+            });
+        });
+
+
+    	$(function() {
+    	// when select changes
+    	$('#hourSelector').on('change', function() {
+    		var hour = -1;
+    		if($(this).val()!="Select Hour")hour=$(this).val();
+
+    		// send data to your endpoint
+    		$.ajax({
+    			url: '/',
+    			method: 'GET',
+    			data: {
+    				hour: hour,
+    			},
+    			dataType: 'json',
+    			success: function(data) {
+    				var msg = data;
+    				markers = JSON.parse(msg.markers);
+    				console.log(markers);
+    				var lat = msg.sourceLat, lon = msg.sourceLon;
+    				var pointX = msg.pointX, pointY = msg.pointY
+    				map.off();map.remove();
+    				init_map(lat,lon,pointX,pointY,markers);
+    			}
+    		});
+    	});
+    });
+
+
+     	
+    	var markers = JSON.parse('{{ markers|escapejs }}');
+    	var lat = JSON.parse('{{ sourceLat|escapejs }}'), lon = JSON.parse('{{ sourceLon|escapejs }}');
+     
+     var pointX = '{{ pointX|escapejs }}', pointY = '{{ pointY|escapejs }}';
+
+    	function _call(lat,lon){
+    		$.ajax(
+    		{
+    			type: 'GET',
+    			url: '/',
+    			data: {
+    				sourceLat: lat,
+    				sourceLon: lon
+    			},
+    			success: function(data){
+    				var msg = $.parseJSON(data);
+    				var lat = msg.sourceLat, lon = msg.sourceLon;
+    				var pointX = msg.pointX, pointY = msg.pointY;
+    				console.log(pointX)
+    				console.log(pointY)
+    				init_map(lat,lon,pointX,pointY,markers);
+    			}
+    		});
+    	}
+
+    	function init_map(lat,lon,pointX,pointY,markers){
+    		console.log(pointX)
+    		map = L.map( 'map', {
+    			layers: MQ.mapLayer(),
+    			center: [lat, lon],
+    			minZoom: 2,
+    			zoom: 5
+    		});
+
+    		console.log(markers.length)
+
+    		var controlLayers = L.control.layers( null, null, {
+    			position: "topright",
+    			collapsed: false
+    		}).addTo(map);
+    		var light = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    			subdomains: ['a','b','c']
+    		}).addTo(map);
+
+    		controlLayers.addBaseLayer(light, 'Carto Light basemap');
+
+    		var terrain = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+    		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+    	}); 
+    	controlLayers.addBaseLayer(terrain, 'Stamen Terrain basemap');
+
+    	var markerClusters = L.markerClusterGroup();
+
+    	for ( var i = 0; i < markers.length; ++i ){
+    		var popup = markers[i].Hour;
+    		if(markers[i].Lat==lat && markers[i].Lon==lon)continue;
+    		var m = L.marker( [markers[i].Lat, markers[i].Lon] ).bindPopup( popup );
+    		markerClusters.addLayer( m );
+    	}
+
+    	map.addLayer( markerClusters );
+
+    	var dir = MQ.routing.directions()
+      .on('success', function(data) {
+      	console.log(data)
+        var legs = data.route.legs,html = '',maneuvers,i, html2 = '';
+        // var sum = 0;
+
+        if (legs && legs.length) {
+          maneuvers = legs[0].maneuvers;
+
+          for (i=0; i < maneuvers.length; i++) {
+            html += (i+1) + '. ';
+            html += maneuvers[i].narrative + " ("+ (maneuvers[i].distance*1.6).toFixed(3) + " km(s))" + '<br/>';
+            // sum += maneuvers[i].distance;
+          }
+
+          L.DomUtil.get('route-narrative').innerHTML = html;
+        }
+
+        var street="", city="", country="", street2="", city2="", country="";
+        if(data.route.locations!=undefined){
+        	street = data.route.locations[0].street;
+        	city = data.route.locations[0].adminArea5;
+        	country = data.route.locations[0].adminArea1;
+
+        	street2 = data.route.locations[1].street;
+        	city2 = data.route.locations[1].adminArea5;
+        	country2 = data.route.locations[1].adminArea1;
+        }
+
+        html2 += "From(A): ";
+        var f=0;
+        if(street!=""){
+        	html2 += street;
+        	f=1;
+        }
+        if(city!=""){
+        	if(street!="")html2 += ",";
+        	html2 += city;
+        	f=1;
+        }
+        if(country!=""){
+        	if(street!=""||city!="")html2 += ",";
+        	html2 += country;
+        	f=1;
+        }
+        if(f)html2 += "<br/>";
+
+        html2 += "To(B): ";
+        if(street2!=""){
+        	html2 += street2;
+        	f=1;
+        }
+        if(city2!=""){
+        	if(street2!="")html2 += ",";
+        	html2 += city2;
+        	f=1;
+        }
+        if(country2!=""){
+        	if(street2!=""||city2!="")html2 += ",";
+        	html2 += country2;
+        	f=1;
+        }
+        if(f)html2 += "<br/>";
+
+        var f2=0;
+
+        var time = data.route.time;
+        if(time!=undefined){
+        	var hour = parseInt(time/3600); time-=(3600*hour);
+        	var minute = parseInt(time/60); time-=(60*minute);
+        	var second = time;
+        	html2 += "Route duration : ";
+        	if(hour!=0)html2 += hour + " hour(s) ";
+        	if(minute!=0)html2 += minute + " minute(s) ";
+        	if(second!=0)html2 += second + " second(s)";
+        	f2 = 1;
+        }
+        var distance = data.route.distance;
+        if(distance!=undefined){
+        	distance *= 1.6;
+        	html2 += "<br/>";
+        	html2 += "Distance: ";
+        	if(distance!=0){
+        		html2 += distance.toFixed(3) + " km(s)";
+        	}
+        	f2 = 1;
+        }
+        if(html2!=''&&f&&f2)L.DomUtil.get('time-distance').innerHTML = html2;
+
+      });
+
+      dir.optimizedRoute({
+        locations: [
+        { latLng: { lat: lat, lng: lon } },
+        { latLng: { lat: pointX, lng: pointY } }
+        ]
+      });
+
+      map.addLayer(MQ.routing.routeLayer({
+      	directions: dir,
+      	fitBounds: true
+      }));    	
+
+      map.on('click', function(e) {
+    		console.log("ok?")
+    		map.off();
+    		map.remove();
+    		_call(e.latlng.lat,e.latlng.lng);
+    	});
+     }
+
+     init_map(lat,lon,pointX,pointY,markers);
+
+    </script>
+
+  </body>
+</html>
