@@ -1,14 +1,79 @@
+# Contents
+- [Abstract](#Abstract)
+- [Chapter 1: Introduction](#c1)
+    - [1.1 Introduction](#1.1)
+    - [1.2 Motivation](#1.2)
+    - [1.3 Methodology](#1.3)
+        - [1.3.1 Frontend](#1.3.1)
+        - [1.3.2 Backend](#1.3.2)
+    - [1.4 Contribution](#1.4)
+    - [1.5 Outline](#1.5)
+- [Chapter 2: Related Works](#c2)
+- [Chapter 3: Data](#c3)
+    - [3.1 Data Collection](#3.1)
+    - [3.2 Data Processing](#3.2)
+- [Chapter 4: Frameworks and Tools](#c4)
+    - [4.1 Python Libraries](#4.1)
+        - [4.1.1 Pandas](#4.1.1)
+        - [4.1.2 Scikit-learn](#4.1.2)
+        - [4.1.3 Matplotlib](#4.1.3)
+    - [4.2 Django (Python Framework)](#4.2)
+        - [4.2.1 Installing and Creating a Project](#4.2.1)
+        - [4.2.2 Starting Web Server](#4.2.2)
+    - [4.3 Mapquest API-key](#4.3)
+- [Chapter 5: System Design and Implementation](#c5)
+    - [5.1 K-means Clustering](#5.1)
+        - [5.1.1 K-means Clustering Method](#5.1.1)
+        - [5.1.2 How to Choose K](#5.1.2)
+        - [5.1.3 K-meast Clustering in Python Library](#5.1.3)
+            - [5.1.3.1 Function Declaration](#5.1.3.1)
+            - [5.1.3.2 Function Parameters](#5.1.3.2)
+            - [5.1.3.3 Function Attributes](#5.1.3.3)
+    - [5.2 R-tree](#5.2)
+        - [5.2.1 Properties of R-tree](#5.2.1)
+        - [5.2.2 R-tree in Python Library](#5.2.2)
+    - [5.3 Design](#5.3)
+- [Chapter 6: Result Analysis](#c6)
+    - [6.1 Output](#6.1)
+        - [6.1.1 Initial Map](#6.1.1)
+        - [6.1.2 Path Direction](#6.1.2)
+        - [6.1.3 Hour Input](#6.1.3)
+        - [6.1.4 Holiday Input](#6.1.4)
+        - [6.1.5 Stamen Terrain Basemap](#6.1.5)
+    - [6.2 Accuracy of Out System](#6.2)
+- [Chapter 7: conclusion](#c7)
+    - [7.1 Conclusion](#7.1)
+    - [7.2 Future Work](#7.2)
+- [References](#References)
+
+
+
+
+<br><br><br>
+
+<a name="Abstract"> </a>
+
 # Abstract
 
 With the immense popularity of ride sharing services, more and more people use services like Uber. It is an online marketplace for riders and drivers. Normally a rider uses his smartphone app to request rides. Ride requests are assigned to a Uber driver, who uses his own vehicle to provide the ride. Low cost, short waiting time, availability as well as the convenience of simplified ride requests and easy payment are considered the main reasons of Uber’s popularity among the riders. On the other hand, the flexibility of work schedule, higher compensation rates and independence attract a lot of part time and full time drivers to contract with Uber. Students, professional drivers or people in-between jobs share their ride to earn some extra cash. As an independent worker, a driver would always want to fill the car with passengers to maximize profit. But it is not always easy to find a rider. Especially for a new driver in a new city. We analyzed Uber historic data in New York city and built a web application. Based on the holiday or workday and different times of the day, we suggest a location to the driver which is not very far away from the current location and has the higher probability of getting a ride. <br><br><br>
 
+<a name="c1"> </a>
+
 # Chapter 1: Introduction
+
+
+<a name="1.1"> </a>
+
 ## 1.1 Introduction
+
 Now-a-days a large number of people use ridesharing services like Uber, Lyft. According to Uber, their service is available in 900 cities, across 93 countries. There are 103 million Uber monthly average users who are served by a total of 5 million drivers[1].
 
 Uber, founded in 2009, is one of the most successful ridesharing companies. It is an online marketplace for riders and drivers. Normally. a rider uses his smartphone Uber app to request a ride. The ride requests are assigned to a specific Uber driver who uses his own vehicle to provide the ride. Low cost, short waiting time, availability as well as the convenience of simplified ride requests and easy payment are the main reasons contributing to Uber’s popularity among the riders. On the other hand, the flexibility of work schedule, higher compensation rates and independence are among the main reasons making Uber popular with drivers.
 
 Independence of work attracts a lot of part time and full time drivers to contract with Uber. Students, professional drivers or people in-between jobs share their ride to earn some extra cash. As an independent worker, a driver would always want to fill the car with passengers to maximize profit.  But it is not always easy to find a rider. Especially for a new driver in a new city. We analyzed Uber historic data in New York city and built a web application. We suggest a place to the driver to be where he can find a rider.<br><br>
+
+
+<a name="1.2"> </a>
 
 ## 1.2 Motivation
 A rider requests a ride using Uber App. A nearby Uber driver can accept the request and complete the ride. In order to accept the ride request a driver has to be in a certain radius of the rider when the rider requests the ride. If the driver is far away, he won’t be able to accept the ride request. And if a driver doesn’t get a request, he has to stay idle or roam around randomly. 
@@ -22,13 +87,26 @@ In our web application, based on Uber historic data we suggest an optimal locati
 2. Not very far away from the current location.
 <br><br>
 
+
+<a name="1.3"> </a>
+
 ## 1.3 Methodology
+
+
+<a name="1.3.1"> </a>
+
 ### 1.3.1 Frontend
 In the frontend we provide an interactive map. A user can click the map and set the clicked location as his current location. We also provide some forms to input other parameters like time of the day and holiday or workday.
 In the output we provide the destination location where he should go to find a rider. We also provide a shortest path to reach the destination from the current location, time to reach the destination as well as  a guide to reach the destination.<br>
 
+
+<a name="1.3.2"> </a>
+
 ### 1.3.2 Backend
 In the backend we train the model using Uber historic data. We used a clustering algorithm to train the model faster by reducing the total number of pickup locations. Also we used a spatial data structure to answer the user’s query faster.<br><br>
+
+
+<a name="1.4"> </a>
 
 ## 1.4 Contribution
 We analyzed the Uber historic data and built a web application. Based on the data we recommend not only an optimal location but also provide a step by step guide on how to reach the destination in the shortest possible path. 
@@ -38,10 +116,15 @@ We used the K-means clustering algorithm to form ‘pickup stations’ with near
 We used a spatial data structure R-tree[9]. It is used to quickly find the closest coordinates of a given coordinate.  Thus we have been able to process users’ queries faster.<br><br>
 
 
+
+<a name="1.5"> </a>
+
 ## 1.5  Outline
 The remainder of the project report is organized as follows. In Chapter 2, we review the existing related works to this project work. Chapter 3 gives an overview of real dataset collection and processing. In Chapter 4 we illustrate the framework and the tools in detail that we have used. Chapter 5 describes our entire process of designing our web application. In Chapter 6, several snapshots and thorough guidelines of our web application are presented. Chapter 7 concludes the research work with future goals and directions.<br><br><br>
 
 
+
+<a name="c2"> </a>
 
 # Chapter 2: Related Works
 
@@ -69,7 +152,12 @@ They developed a cost-effective recommender system for taxi drivers. For this, t
 Their main goal is to minimize the distance between the taxi driver and the next anticipated passenger. To anticipate the next passenger, they used a Monte Carlo Tree Search and developed a route recommendation engine called MDM:Minimizing Distance. Simulation shows that the model is robust to anomalous events like concerts, sporting events, etc.<br><br><br>
 
 
+<a name="c3"> </a>
+
 # Chapter 3: Data
+
+
+<a name="3.1"> </a>
 
 ## 3.1 Data Collection
 In 2015, by filing a Freedom of Information Law request the news and analytics website FiveThirtyEight obtained historical Uber data in New York City from the NYC Taxi & Limousine Commission. From this data set we used pickups from April, 2014 - September, 2014.[10] 
@@ -77,6 +165,8 @@ In this dataset we have GPS coordinates of the pickup location as well as time a
 
 We used another dataset from data.world[11] to verify if the corresponding pickup date was a holiday or not in New York City.<br><br>
 
+
+<a name="3.2"> </a>
 
 ## 3.2 Data Processing
 We consider three attributes in our real dataset.
@@ -90,8 +180,19 @@ Holiday is a boolean variable. True if the day is a holiday and false if not. Al
 
 After cleaning and merging the data, we have a total of 4.5 million Uber pickup points in New York City. We chose a subset (around 3%) of the data randomly for our project. <br><br><br>
 
+
+<a name="c4"> </a>
+
 # Chapter 4: Frameworks and Tools
+
+
+<a name="4.1"> </a>
+
 ## 4.1 Python Libraries
+
+
+<a name="4.1.1"> </a>
+
 ### 4.1.1 Pandas
 Pandas is an open source Python library for data analysis as well as in data science. The package is used for various data manipulation tasks. It includes a variety of techniques which is much easier working on data analysis related problems.
 
@@ -102,6 +203,9 @@ Features of pandas dataframe:
 * Different types of arithmetic operations can be done.
 
 Installation using pip: *pip install pandas*<br>
+
+
+<a name="4.1.2"> </a>
 
 ### 4.1.2 Scikit-learn
 Scikit-learn is the most powerful Python library for machine learning. It is used for solving many machine learning and statistical modeling problems including classification, regression, clustering etc. in Python.
@@ -122,6 +226,9 @@ Scikit-learn provides including:
 
 Installation using pip: *pip install -U scikit-learn*<br>
 
+
+<a name="4.1.3"> </a>
+
 ### 4.1.3 Matplotlib
 Matplotlib is a popular Python library which is used for data visualization including histograms, scatterplots etc. It mainly plots the dataset into 2-D visualization format. In January 2018, the latest version (2.2.0) was released.
 
@@ -129,8 +236,14 @@ Histogram plotting: The *matplotlib.pyplot.hist()* function draws a histogram in
 
 Scatter-plotting: Scatter plots are used to plot data points on horizontal and vertical axis to visualize how data points look like.<br><br>
 
+
+<a name="4.2"> </a>
+
 ## 4.2 Django (Python Framework)
 Django is a widely used and high level Python web framework which provides the MVT (model-templates-views) architecture pattern. It is a fully featured server-side framework and provides the full stack services as well. Simplicity, flexibility, reliability and scalability are the main goals of this web framework.<br>
+
+
+<a name="4.2.1"> </a>
 
 ### 4.2.1 Installing and Creating a Project
 In order to install django, first we need to create a virtual environment. Because we don’t want to disturb our whole system.
@@ -147,6 +260,9 @@ After creating the virtual environment we can install django and start a new pro
 
 <br>
 
+
+<a name="4.2.2"> </a>
+
 ### 4.2.2 Starting Web Server
 Our created project will run on the local web server.
 
@@ -159,6 +275,9 @@ Our created project will run on the local web server.
 </p>
 
 <br><br>
+
+
+<a name="4.3"> </a>
 
 ## 4.3 Mapquest API-key
 We used Mapquest API-key to take input from the user and also output the destination as well as direction to the destination.
@@ -191,11 +310,20 @@ Mapquest Plugin:
 
 <br><br><br>
 
+
+<a name="c5"> </a>
+
 # Chapter 5: System Design and Implementation
+
+
+<a name="5.1"> </a>
 
 ## 5.1 K-means Clustering
 Kmeans is an unsupervised machine learning algorithm that can solve the clustering problems. It is used to identify the clusters of data objects in a dataset which ensures the maximum similarity of objects within each cluster. It was first developed by Macqueen, 1967.[12]
 More formally, K-means clustering is an iterative technique which is used for grouping the similar objects cluster from the dataset and creating K pre-defined non-overlapping clusters. Each object belongs to only one cluster.
+
+
+<a name="5.1.1"> </a>
 
 ### 5.1.1 K-means Clustering Method
 Initially, K is defined. The following steps can be performed:
@@ -211,14 +339,26 @@ Initially, K is defined. The following steps can be performed:
 
 <br>
 
+
+<a name="5.1.2"> </a>
+
 ### 5.1.2 How to Choose K
 The Elbow method is the most popular way to find the optimal K(number of clusters). It works with total variations within each cluster. Using this method, we get an optimal K for which total variations within each cluster is as minimal as possible.
 To calculate the distance between data points and cluster centroids, we can use any method such as Euclidean distance or Manhattan distance.
 <br>
 
+
+<a name="5.1.3"> </a>
+
 ### 5.1.3 K-means Cluster in Python Library
+
+<a name="5.1.3.1"> </a>
+
 #### 5.1.3.1 Function Declaration
 *class sklearn.cluster.KMeans(n_clusters=8, \*, init='k-means++', n_init=10, max_iter=300, tol=0.001, precompute_distances='deprecated', verbose=0, random_state=None, copy_x=True, n_jobs='deprecated', algorithm='auto')*
+
+
+<a name="5.1.3.2"> </a>
 
 #### 5.1.3.2 Function Parameters
 *n_clusters(int), default=8:* The number of clusters.
@@ -255,6 +395,7 @@ It takes arguments *(X, n_clusters, a random state)* when a callable is passed.
 
 *algorithm{“auto”, “full”, “elkan”}, default=”auto”:* K-means algorithm to use. The classical EM-style algorithm is “full”. Using the triangle inequality the “elkan” variation is more efficient. However it needs extra memory space due to an extra array of shapes *(n_samples, n_clusters)* allocation.
 
+<a name="5.1.3.3"> </a>
 
 #### 5.1.3.3 Function Attributes
 *cluster_centers_ndarray of shape (n_clusters, n_features):* It returns coordinates of cluster centers. If the algorithm stops before completely converging, it will be inconsistent with labels_.
@@ -267,8 +408,12 @@ inertia_float: It computes the  squared distances sum of objects to their closes
 <br><br>
 
 
+<a name="5.2"> </a>
+
 ## 5.2 R-tree
 R-tree is a spatial data structure which is used for indexing multi-dimensional information. It is  highly useful for spatial data queries, searching and storage. It was proposed by Antonin Guttman in 1984.[9]
+
+<a name="5.2.1"> </a>
 
 ### 5.2.1 Properties of R-tree
 * It consists of a root, internal nodes and leaf nodes.
@@ -281,6 +426,8 @@ R-tree is a spatial data structure which is used for indexing multi-dimensional 
 </p>
 
 <br>
+
+<a name="5.2.2"> </a>
 
 ### 5.2.2 R-tree in Python Library
 Installation: *pip install rtree*
@@ -296,6 +443,8 @@ Intersection Query: *list(idx.intersection((left, bottom, right, top)))*. Return
 Nearest point Query: *list(idx.nearest((left, bottom, right, top), n))*. Returns n nearest points of the rectangle (left, bottom, right, top).
 
 <br><br>
+
+<a name="5.3"> </a>
 
 ## 5.3 Design
 1. After cleaning and merging the data, the total dataset is classified into 48 (Hour = 24 x Holiday = 2) classes. Each class is represented by a dataframe. 
@@ -320,9 +469,18 @@ Nearest point Query: *list(idx.nearest((left, bottom, right, top), n))*. Returns
 
 
 <br><br><br>
+
+<a name="c6"> </a>
+
 # Chapter 6: Result Analysis
 
+
+<a name="6.1"> </a>
+
 ## 6.1 Output
+
+<a name="6.1.1"> </a>
+
 ### 6.1.1 Initial Map
 In the initial map we added cluster region and cluster size to give a better understanding of the data to the user.
 
@@ -331,6 +489,8 @@ In the initial map we added cluster region and cluster size to give a better und
 </p>
 
 <br>
+
+<a name="6.1.2"> </a>
 
 ### 6.1.2 Path Direction
 Here an optimal destination is calculated from the user provided location. A shortest path to the destination is also displayed. In the top right of the map we can find the path summary and in the bottom left we can see a detailed guide of how to reach the destination.
@@ -341,6 +501,8 @@ Here an optimal destination is calculated from the user provided location. A sho
 
 <br>
 
+<a name="6.1.3"> </a>
+
 ### 6.1.3 Hour Input
 We provided a drop down menu to select Hour between 0-23.
 
@@ -349,6 +511,8 @@ We provided a drop down menu to select Hour between 0-23.
 </p>
 
 <br>
+
+<a name="6.1.4"> </a>
 
 ### 6.1.4 Holiday Input
 We provided a radio button to select the holiday. 
@@ -359,6 +523,8 @@ We provided a radio button to select the holiday.
 
 <br>
 
+<a name="6.1.5"> </a>
+
 ### 6.1.5 Stamen Terrain Basemap
 There is also another option to select between Stamen Terrain Basemap and Carto Light Basemap. Stamen Terrain Basemap is an additional feature on map for background customizations which indicates the hill shading and natural vegetation colors. It showcases the advanced labeling and linework generation of dual-carriageway roads.
 
@@ -367,6 +533,9 @@ There is also another option to select between Stamen Terrain Basemap and Carto 
 </p>
 
 <br><br>
+
+
+<a name="6.2"> </a>
 
 ## 6.2 Accuracy of Our System
 In our algorithm we only consider a certain amount of closest pickup stations from the driver's current location. Let this amount be T. For example, if T=20, we find the closest 20 pickup stations from the driver’s current location and calculate score for each pickup station using the formula (1 / distance between driver’s current location and pickup station) *  priority of that pickup station. The best scored pickup station is selected as the optimal destination.
@@ -389,12 +558,20 @@ For T=50 we have 99.5% accuracy and it takes a reasonable amount of time to answ
 
 <br><br><br>
 
+<a name="c.7"> </a>
+
 # Chapter 7: Conclusion
+
+<a name="7.1"> </a>
+
 ## 7.1 Conclusion
 Based on this web application, it brings great value to an Uber Driver in terms of minimizing the idle times along with maximized revenue. We used Uber's historic dataset and built K-means cluster models using python scikit-learn library. We find the closer stations from the user’s coordinate using a spatial data structure, Rtree.
 Then we suggest an optimal station which will minimize the idle times of a driver and maximize the daily revenue as well.
 
 <br><br>
+
+
+<a name="7.2"> </a>
 
 ## 7.2 Future Work
 We can add weather attributes to make our prediction more accurate. Weather data variables such as snow, rain and humidity would make it more meaningful and realistic through filtering. 
@@ -402,6 +579,8 @@ We can add weather attributes to make our prediction more accurate. Weather data
 We can work with different types of Uber cars (UberXL, SUVs, Bike). Specifying the types of Uber car, it would better improve the quality of our prediction model.
 
 <br><br><br>
+
+<a name="References"> </a>
 
 # References
 
