@@ -3,3 +3,10 @@ With the immense popularity of ride sharing services, more and more people use s
 
 ## Data
 In 2015, by filing a Freedom of Information Law request the news and analytics website FiveThirtyEight obtained historical [Uber Data](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city?select=uber-raw-data-may14.csv) in New York City from the NYC Taxi & Limousine Commission. From this data set we used pickups from April, 2014 - September, 2014. In this dataset we have GPS coordinates of the pickup location as well as time and date when the pickup happened. We used another [dataset](https://data.world/cegomez22/dimdate) from data.world to verify if the corresponding pickup date was a holiday or not in New York City.
+
+We consider three attributes in our real dataset.
+1. **Location** is a pair of float variables indicating the Latitude and Longitude. In our dataset Location is from where Uber picked up the passenger. In the output we also provide a location as the destination.
+2. **Hour** is the time of the day when pick up has happened. We divide the day in 24 hours. So the Hour variable can take values between 0-23. We need Hour as a different attribute because depending on the hour of the day pickup frequency can differ.
+3. **Holiday** is a boolean variable. True if the day is a holiday and false if not. Also depending on the holiday pickup frequency can differ. During the holiday people tend to stay awake late at night.
+
+After cleaning and merging the data, we have a total of 4.5 million Uber pickup points in New York City. We chose a subset (around 3%) of the data randomly for our project.
