@@ -89,3 +89,45 @@ Holiday is a boolean variable. True if the day is a holiday and false if not. Al
 </p>
 
 After cleaning and merging the data, we have a total of 4.5 million Uber pickup points in New York City. We chose a subset (around 3%) of the data randomly for our project. <br><br><br>
+
+# Chapter 4: Frameworks and Tools
+## 4.1 Python Libraries
+### 4.1.1 Pandas
+Pandas is an open source Python library for data analysis as well as in data science. The package is used for various data manipulation tasks. It includes a variety of techniques which is much easier working on data analysis related problems.
+
+Features of pandas dataframe:
+* Columns can be different types of data.
+* Size can be altered.
+* Rows and Columns are label based.
+* Different types of arithmetic operations can be done.
+
+Installation using pip: *pip install pandas*<br>
+
+### 4.1.2 Scikit-learn
+Scikit-learn is the most powerful Python library for machine learning. It is used for solving many machine learning and statistical modeling problems including classification, regression, clustering etc. in Python.
+
+Pre-requisites:
+* Python (Accessible for version >=3.5)
+* NumPy (Accessible for version >=1.11.0)
+* Scipy (Accessible for version >=0.17.0)
+* Matplotlib (Accessible for version >= 1.5.1)
+* Pandas (Accessible for version >= 0.18.0)
+
+Scikit-learn provides including:
+* Supervised learning algorithms (such as linear regression, support vector machine(SVM), decision tree etc.)
+* Unsupervised learning algorithms (such as clustering etc.)
+* Different kinds of Preprocessing such as Min-Max Normalization
+* Reduce the number of features and create some new features (feature extraction)
+* Select those features which are most relevant (feature selection)
+
+Installation using pip: *pip install -U scikit-learn*<br>
+
+### 4.1.3 Matplotlib
+Matplotlib is a popular Python library which is used for data visualization including histograms, scatterplots etc. It mainly plots the dataset into 2-D visualization format. In January 2018, the latest version (2.2.0) was released.
+
+Histogram plotting: The *matplotlib.pyplot.hist()* function draws a histogram including some computations.
+
+Scatter-plotting: Scatter plots are used to plot data points on horizontal and vertical axis to visualize how data points look like.<br><br>
+
+
+
