@@ -208,3 +208,60 @@ Initially, K is defined. The following steps can be performed:
 <p align="center">
 <img src="Images/clustering.png" width="700" height="450" />
 </p>
+
+<br>
+
+### 5.1.2 How to Choose K
+The Elbow method is the most popular way to find the optimal K(number of clusters). It works with total variations within each cluster. Using this method, we get an optimal K for which total variations within each cluster is as minimal as possible.
+To calculate the distance between data points and cluster centroids, we can use any method such as Euclidean distance or Manhattan distance.
+<br>
+
+### 5.1.3 K-means Cluster in Python Library
+#### 5.1.3.1 Function Declaration
+*class sklearn.cluster.KMeans(n_clusters=8, \*, init='k-means++', n_init=10, max_iter=300, tol=0.001, precompute_distances='deprecated', verbose=0, random_state=None, copy_x=True, n_jobs='deprecated', algorithm='auto')*
+
+#### 5.1.3.2 Function Parameters
+*n_clusters(int), default=8:* The number of clusters.
+
+*init{‘k-means++’, ‘random’}, callable or array-like of shape (n_clusters, n_features), default=’k-means++’:*
+
+*‘k-means++’ :* Initially selects the cluster centers for k-mean clustering.
+
+*‘random’:* Choose initial n_cluster centroids randomly from the dataset.
+
+Function shape *(n_clusters, n_features)* returns the initial cluster centers if an array is passed.
+It takes arguments *(X, n_clusters, a random state)* when a callable is passed.
+
+*n_init(int), default=10:* Number of times the K-means algorithm will be run.
+
+*max_iter(int), default=300:* Number of iterations of the K-means algorithm.
+
+*tol(float), default=1e-4:* It indicates the relative tolerance regards to Frobenius norm.
+
+*precompute_distances{‘auto’, True, False}, default=’auto’:*
+* *‘auto’:* It does not precompute distances when n_samples * n_clusters > 12 million.
+
+* *True:* always precompute distances.
+
+* *False:* never precompute distances.
+
+*verbose(int), default=0:* Verbosity mode.
+
+*random_state(int), RandomState instance or None, default=None:* Generate random numbers for centroid initialization.
+
+*copy_x(bool), default=True:* Centering the data points, pre-computing distances seems more accurate. The original data is not altered when copy_x is True, otherwise data is altered. If copy_x is False, before the function returns it is put in back, but few numerical differences can be occured by subtracting and adding the mean of data.
+
+*n_jobs(int), default=None:*  The number of OpenMP threads which are used for the computation.
+
+*algorithm{“auto”, “full”, “elkan”}, default=”auto”:* K-means algorithm to use. The classical EM-style algorithm is “full”. Using the triangle inequality the “elkan” variation is more efficient. However it needs extra memory space due to an extra array of shapes *(n_samples, n_clusters)* allocation.
+
+
+#### 5.1.3.3 Function Attributes
+*cluster_centers_ndarray of shape (n_clusters, n_features):* It returns coordinates of cluster centers. If the algorithm stops before completely converging, it will be inconsistent with labels_.
+
+*labels_ndarray of shape (n_samples,):* Indicated  labels of each point
+inertia_float: It computes the  squared distances sum of objects to their closest cluster center.
+
+*n_iter_int:* Number of iterations run.
+
+<br><br>
