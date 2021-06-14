@@ -172,17 +172,19 @@ For ease of the users, customization of route experience is preferable including
 Mapquest Plugin:
 
 * Leaflet CSS file is included in header section:
-    <xmp>
+    ```
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-   </xmp>
+   ```
 
 * After that, Leaflet JavaScript file is included:
+    ```
     <!-- Make sure you put this AFTER Leaflet's CSS --> 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    ```
 
 * A div tag is created for map:
-    <xmp><div id="map"></div></xmp>
+    ```<div id="map"></div></xmp>```
 
 * Adding styles including the height of map:
-    #map { height: 180px; }
+    ```#map { height: 180px; }```
