@@ -43,3 +43,28 @@ The remainder of the project report is organized as follows. In Chapter 2, we re
 
 
 
+# Chapter 2: Related Works
+
+
+**1. Uber Optimization: Finding Passengers Faster.**[2]
+They recommend a destination for the driver based on the location, time of the day, day of the week and weather. They find all the pickup points in a quarter mile radius around the user's location. For each of those pickup points they calculate the score of the point by the number of other pickup points within a tenth of a mile radius. And the best score pickup point is selected as the destination.
+
+**2. Uber/Lyft Maximization: More Money for The Time.**[3]
+They transformed the pickup and dropoff coordinates into a heatmap using Leaflet plugin. They also added filters so that the user can manually select the days of the week and times for pick-ups or drop-offs. To give drivers a better idea they added a histogram on the sidebar to show the number of pick-ups and drop-offs on the users filtered criteria.
+
+**3. Reinforcement Learning for Optimizing Driving Policies on Cruising Taxis Services.**[4]
+To decrease waiting time of a cruising taxi driver, they simulated different decisions of the driver. For that, they built a Reinforcement Learning framework using dynamic programming. They formulated a Markov Decision Process on driver’s behavior considering the effect of driver’s action in the long run.   
+
+**4. Optimizing Earnings for On-Demand Ride-Hailing.**[5]
+Through a series of dynamic programming, they optimize a strategy for a ride-hailing driver to maximize the expected earning.
+
+
+**5. Spatio-temporal feature fusion for Dynamic taxi route recommendation.**[6]
+To decrease waiting time of a passenger and increase profit of drivers they recommend a dynamic taxi route to the drivers. First they use spatio-temporal features to measure the degree of easiness of a vacant taxi to pick up a new passenger. Second, to recommend the route effectively they design an adaptive deep reinforcement learning method to better fuse the extracted spatio-temporal features.
+
+**6. A Cost-Effective Recommender System for Taxi Drivers.**[7]
+They developed a cost-effective recommender system for taxi drivers. For this, they use a brute-force strategy to find the optimal route for recommendation. 
+
+**7. Route Recommendations for Idle Taxi Drivers.**[8]
+Their main goal is to minimize the distance between the taxi driver and the next anticipated passenger. To anticipate the next passenger, they used a Monte Carlo Tree Search and developed a route recommendation engine called MDM:Minimizing Distance. Simulation shows that the model is robust to anomalous events like concerts, sporting events, etc.<br><br><br>
+
