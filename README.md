@@ -40,8 +40,8 @@
         - [6.1.3 Hour Input](#6.1.3)
         - [6.1.4 Holiday Input](#6.1.4)
         - [6.1.5 Stamen Terrain Basemap](#6.1.5)
-    - [6.2 Accuracy of Out System](#6.2)
-- [Chapter 7: conclusion](#c7)
+    - [6.2 Accuracy of Our System](#6.2)
+- [Chapter 7: Conclusion](#c7)
     - [7.1 Conclusion](#7.1)
     - [7.2 Future Work](#7.2)
 - [References](#References)
@@ -558,7 +558,7 @@ For T=50 we have 99.5% accuracy and it takes a reasonable amount of time to answ
 
 <br><br><br>
 
-<a name="c.7"> </a>
+<a name="c7"> </a>
 
 # Chapter 7: Conclusion
 
