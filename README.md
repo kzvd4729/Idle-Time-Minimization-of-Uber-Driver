@@ -279,3 +279,41 @@ R-tree is a spatial data structure which is used for indexing multi-dimensional 
 <p align="center">
 <img src="Images/rTree.png" width="700" height="450" />
 </p>
+
+<br>
+
+### 5.2.2 R-tree in Python Library
+Installation: *pip install rtree*
+
+Importing an index: *from rtree import index*
+
+Constructing an index: *idx = index.Index()*
+
+Insert records into the index: *idx.insert(id, (left, bottom, right, top)). Insert rectangle (left, bottom, right, top)* to index id.
+
+Intersection Query: *list(idx.intersection((left, bottom, right, top)))*. Returns all the points inside the rectangle (left, bottom, right, top).
+
+Nearest point Query: *list(idx.nearest((left, bottom, right, top), n))*. Returns n nearest points of the rectangle (left, bottom, right, top).
+
+<br><br>
+
+## 5.3 Design
+1. After cleaning and merging the data, the total dataset is classified into 48 (Hour = 24 x Holiday = 2) classes. Each class is represented by a dataframe. 
+
+2. For each class, K-means clustering algorithm is applied by setting K = 10% of total pickup points (K = Number of clusters). We will call each cluster a ‘pickup station’. The size of the cluster is the priority of the pickup station.
+
+<p align="center">
+<img src="Images/clusterComparison.png" width="700" height="450" />
+</p>
+
+3. For each class, pickup stations are inserted into R-tree.
+
+4. In the frontend user provides three inputs. Location by using the interactive map. Hour by selecting a drop down menu and Holiday by selecting radio button.
+
+5. From Hour=user provided and Holiday=user provided class we take the closest 50 pickup stations using R-tree.
+
+6. The score of each pickup station is calculated by (1 / distance between user’s location and pickup station) *  priority of the pickup station.
+
+7. Pickup station with the highest score is selected as the destination.
+
+8. A step by step guide from user’s location to destination is displayed in the map using the map API.
