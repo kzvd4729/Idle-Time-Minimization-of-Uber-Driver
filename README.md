@@ -129,5 +129,32 @@ Histogram plotting: The *matplotlib.pyplot.hist()* function draws a histogram in
 
 Scatter-plotting: Scatter plots are used to plot data points on horizontal and vertical axis to visualize how data points look like.<br><br>
 
+## 4.2 Django (Python Framework)
+Django is a widely used and high level Python web framework which provides the MVT (model-templates-views) architecture pattern. It is a fully featured server-side framework and provides the full stack services as well. Simplicity, flexibility, reliability and scalability are the main goals of this web framework.<br>
 
+### 4.2.1 Installing and Creating a Project
+In order to install django, first we need to create a virtual environment. Because we don’t want to disturb our whole system.
+
+<p align="center">
+<img src="Images/virtulaEnvironment.png" width="700" height="450" />
+</p>
+
+After creating the virtual environment we can install django and start a new project.
+
+<p align="center">
+<img src="Images/startingDjangoProject.png" width="700" height="450" />
+</p>
+
+<br>
+
+### 4.2.2 Starting Web Server
+Our created project will run on the local web server.
+
+<p align="center">
+<img src="Images/startingWebSarver.png" width="700" height="450" />
+</p>
+
+<p align="center">
+<img src="Images/webServerinLocalhost.png" width="700" height="450" />
+</p>
 
