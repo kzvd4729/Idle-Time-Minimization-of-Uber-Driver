@@ -265,3 +265,17 @@ inertia_float: It computes the  squared distances sum of objects to their closes
 *n_iter_int:* Number of iterations run.
 
 <br><br>
+
+
+## 5.2 R-tree
+R-tree is a spatial data structure which is used for indexing multi-dimensional information. It is  highly useful for spatial data queries, searching and storage. It was proposed by Antonin Guttman in 1984.[9]
+
+### 5.2.1 Properties of R-tree
+* It consists of a root, internal nodes and leaf nodes.
+* Root holds the index of the largest region.
+* If complete overlapping occurs between parent and child nodes, then the parent node holds the index of that child node.
+* Minimum bounding region(minimal area of surrounding the region) of current objects is stored into leaf nodes
+
+<p align="center">
+<img src="Images/rTree.png" width="700" height="450" />
+</p>
