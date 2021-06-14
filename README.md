@@ -188,3 +188,23 @@ Mapquest Plugin:
 
 * Adding styles including the height of map:
     ```#map { height: 180px; }```
+
+<br><br><br>
+
+# Chapter 5: System Design and Implementation
+
+## 5.1 K-means Clustering
+Kmeans is an unsupervised machine learning algorithm that can solve the clustering problems. It is used to identify the clusters of data objects in a dataset which ensures the maximum similarity of objects within each cluster. It was first developed by Macqueen, 1967.[12]
+More formally, K-means clustering is an iterative technique which is used for grouping the similar objects cluster from the dataset and creating K pre-defined non-overlapping clusters. Each object belongs to only one cluster.
+
+### 5.1.1 K-means Clustering Method
+Initially, K is defined. The following steps can be performed:
+1. Make K cluster centroids randomly.
+2. Compute the distance from each object to each cluster centroid
+3. Assign each object to a cluster from which cluster centroid distance is minimum
+4. Compute the K cluster centroids for current clusters using mean point
+5. If K cluster centroids remain the same for two or more consecutive times then stop the procedure, otherwise go to step 3.
+
+<p align="center">
+<img src="Images/clustering.png" width="700" height="450" />
+</p>
