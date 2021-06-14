@@ -13,5 +13,7 @@ Independence of work attracts a lot of part time and full time drivers to contra
 ## 1.2 Motivation
 A rider requests a ride using Uber App. A nearby Uber driver can accept the request and complete the ride. In order to accept the ride request a driver has to be in a certain radius of the rider when the rider requests the ride. If the driver is far away, he won’t be able to accept the ride request. And if a driver doesn’t get a request, he has to stay idle or roam around randomly. 
 
-
+<p align="center">
+<img src="Images/introduction.png" width="500" height="350" />
+</p>
 
