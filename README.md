@@ -68,3 +68,24 @@ They developed a cost-effective recommender system for taxi drivers. For this, t
 **7. Route Recommendations for Idle Taxi Drivers.**[8]
 Their main goal is to minimize the distance between the taxi driver and the next anticipated passenger. To anticipate the next passenger, they used a Monte Carlo Tree Search and developed a route recommendation engine called MDM:Minimizing Distance. Simulation shows that the model is robust to anomalous events like concerts, sporting events, etc.<br><br><br>
 
+
+# Chapter 3: Data
+
+## 3.1 Data Collection
+In 2015, by filing a Freedom of Information Law request the news and analytics website FiveThirtyEight obtained historical Uber data in New York City from the NYC Taxi & Limousine Commission. From this data set we used pickups from April, 2014 - September, 2014.[10] 
+In this dataset we have GPS coordinates of the pickup location as well as time and date when the pickup happened.
+
+We used another dataset from data.world[11] to verify if the corresponding pickup date was a holiday or not in New York City.<br><br>
+
+
+## 3.2 Data Processing
+We consider three attributes in our real dataset.
+Location is a pair of float variables indicating the Latitude and Longitude. In our dataset Location is from where Uber picked up the passenger. In the output we also provide a location as the destination.
+Hour is the time of the day when pick up has happened. We divide the day in 24 hours. So the Hour variable can take values between 0-23. We need Hour as a different attribute because depending on the hour of the day pickup frequency can differ.
+Holiday is a boolean variable. True if the day is a holiday and false if not. Also depending on the holiday pickup frequency can differ. During the holiday people tend to stay awake late at night.
+
+<p align="center">
+<img src="Images/dataVisualization.png" width="700" height="450" />
+</p>
+
+After cleaning and merging the data, we have a total of 4.5 million Uber pickup points in New York City. We chose a subset (around 3%) of the data randomly for our project. <br><br><br>
