@@ -158,3 +158,31 @@ Our created project will run on the local web server.
 <img src="Images/webServerinLocalhost.png" width="700" height="450" />
 </p>
 
+<br><br>
+
+## 4.3 Mapquest API-key
+We used Mapquest API-key to take input from the user and also output the destination as well as direction to the destination.
+
+<p align="center">
+<img src="Images/mapquestAPI.png" width="700" height="450" />
+</p>
+
+For ease of the users, customization of route experience is preferable including quickest driving time, shortest distance or approximate walking distance. In order to accomplish the task, we used *Optimized Route* function and it provides an optimal route.
+
+Mapquest Plugin:
+
+* Leaflet CSS file is included in header section:
+    <xmp>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+   </xmp>
+
+* After that, Leaflet JavaScript file is included:
+    <!-- Make sure you put this AFTER Leaflet's CSS --> 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+* A div tag is created for map:
+    <xmp><div id="map"></div></xmp>
+
+* Adding styles including the height of map:
+    #map { height: 180px; }
